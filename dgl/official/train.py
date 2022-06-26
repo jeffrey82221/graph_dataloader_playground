@@ -1,6 +1,7 @@
 
 from dataloader import train_dataloader, valid_dataloader
-from dataloader import num_features, num_classes, device
+from dataloader import num_features, num_classes
+from config import device
 import torch
 import torch.nn.functional as F
 from graphsage import Model

@@ -3,30 +3,16 @@ import dgl
 import torch
 import numpy as np
 from ogb.nodeproppred import DglNodePropPredDataset
+from config import device
+from full_graph import prepare_full_graph, get_splits
 
-# Loading Dataset
-dataset = DglNodePropPredDataset('ogbn-arxiv')
-device = 'cpu'      # change to 'cuda' for GPU
-
-# Preprocess the Graph
-graph, node_labels = dataset[0]
-# Add reverse edges since ogbn-arxiv is unidirectional.
-graph = dgl.add_reverse_edges(graph)
-graph.ndata['label'] = node_labels[:, 0]
-print(graph)
-print(node_labels)
-
-node_features = graph.ndata['feat']
-num_features = node_features.shape[1]
-num_classes = (node_labels.max() + 1).item()
+graph = prepare_full_graph()
+num_features = graph.ndata['feat'].shape[1]
+num_classes = (graph.ndata['label'].max() + 1).item()
 print('Number of features:', num_features)
 print('Number of classes:', num_classes)
 
-# Get Splitting Nodes:
-idx_split = dataset.get_idx_split()
-train_nids = idx_split['train']
-valid_nids = idx_split['valid']
-test_nids = idx_split['test']
+train_nids, valid_nids, test_nids = get_splits()
 
 # Defining Neighbor Sampler and Data Loader in DGL
 # To write your own neighbor sampler, please refer to this user guide section.
