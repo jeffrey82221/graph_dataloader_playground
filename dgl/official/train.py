@@ -5,7 +5,8 @@ from config import device
 import torch
 import torch.nn.functional as F
 from graphsage import Model
-model = Model(num_features, 128, num_classes).to(device)
+h_size = 64
+model = Model(num_features, h_size, num_classes).to(device)
 opt = torch.optim.Adam(model.parameters())
 # Training Procedure
 

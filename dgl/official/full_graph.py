@@ -18,3 +18,12 @@ def get_splits():
     valid_nids = idx_split['valid']
     test_nids = idx_split['test']
     return train_nids, valid_nids, test_nids
+
+
+def prepare_full_hetero_graph():
+    dataset = DglNodePropPredDataset('ogbn-mag')
+    # Preprocess the Graph
+    graph, node_labels = dataset[0]
+    # Add reverse edges since ogbn-arxiv is unidirectional.
+    graph.ndata['label'] = {'paper': node_labels['paper']}
+    return graph
