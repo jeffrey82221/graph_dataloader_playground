@@ -1,5 +1,7 @@
+redis_server/RedisGraph
 dgl_data_processed
 *.gz
+*.zip
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

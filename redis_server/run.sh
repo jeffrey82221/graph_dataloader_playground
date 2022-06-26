@@ -1,0 +1,1 @@
+/usr/local/lib/python3.7/dist-packages/redis_server/bin/redis-server --port 8888 --loadmodule /usr/local/lib/redisgraph/redisgraph.so
