@@ -28,5 +28,5 @@ def create_graph(connection_string: str):
         
 
 
-# screate_graph("redis://127.0.0.1:6379/?graph=email")   
-create_graph("neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email")
+create_graph("redis://127.0.0.1:6379/?graph=email")   
+# create_graph("neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email")
