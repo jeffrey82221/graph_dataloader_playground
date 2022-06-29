@@ -28,5 +28,13 @@ def create_graph(connection_string: str):
         
 
 
-create_graph("redis://127.0.0.1:6379/?graph=email")   
-# create_graph("neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email")
+# create_graph("redis://127.0.0.1:6379/?graph=email")
+conn_str = "neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email"
+create_graph(conn_str)
+gh = SQErzoGraph(conn_str)
+q = gh.Query.raw(
+        "match (u1:User)-[:Meet]->(u2:User) return u1, u2"
+    ).execute(map_to={"u1": UserNode, "u2": UserNode})
+print(q)
+# TODO: 
+# FIX: Edge seems to not saved in neo4j version
