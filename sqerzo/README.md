@@ -10,7 +10,7 @@
 # To fit neo4j community edition: 
 
 - [ ] remove `XXX` from cypher: `CREATE CONSTRAINT XXX ON ()-[p:{label}]-() ASSERT EXISTS (p.{key})`
-- [ ] remove `XXX` from cypher: `CREATE CONSTRAINT {constrain_name}_unique_{key} IF NOT EXISTS ON (p:{label}) ASSERT p.{key} IS UNIQUE`
+- [ ] remove `XXX` from cypher: `CREATE CONSTRAINT XXX IF NOT EXISTS ON (p:{label}) ASSERT p.{key} IS UNIQUE`
 - [ ] remove the `CREATE INDEX` cypher
 
 # To fit python3.6: 
