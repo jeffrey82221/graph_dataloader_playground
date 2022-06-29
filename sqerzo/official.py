@@ -29,7 +29,8 @@ def create_graph(connection_string: str):
 
 
 # create_graph("redis://127.0.0.1:6379/?graph=email")
-conn_str = "neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email"
+# conn_str = "neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email"
+conn_str = "redis://127.0.0.1:6379/?graph=email"
 create_graph(conn_str)
 gh = SQErzoGraph(conn_str)
 q = gh.Query.raw(
@@ -37,4 +38,4 @@ q = gh.Query.raw(
     ).execute(map_to={"u1": UserNode, "u2": UserNode})
 print(q)
 # TODO: 
-# FIX: Edge seems to not saved in neo4j version
+# FIX: Edge seems to not saved in both neo4j & redisgraph version
