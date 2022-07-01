@@ -96,8 +96,10 @@ def extract_examples(conn_str):
 # TEST:
 # 2. [X] Make sure q return from both redisgraph & neo4j are the same 
 
-neo_node_tuples_q, neo_nodes_q, neo_edges_q, neo_drive_edges_q, neo_car_nodes_q = extract_examples("neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email")
-redis_node_tuples_q, redis_nodes_q, redis_edges_q, redis_drive_edges_q, redis_car_nodes_q = extract_examples("redis://127.0.0.1:6379/?graph=email")
+neo_node_tuples_q, neo_nodes_q, neo_edges_q, neo_drive_edges_q, neo_car_nodes_q = extract_examples(
+    "neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email")
+redis_node_tuples_q, redis_nodes_q, redis_edges_q, redis_drive_edges_q, redis_car_nodes_q = extract_examples(
+    "redis://127.0.0.1:6379/?graph=email")
 import pprint
 print('Node Tuples:')
 pprint.pprint(neo_node_tuples_q)
