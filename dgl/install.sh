@@ -8,6 +8,9 @@ apt-key add /var/cuda-repo-ubuntu1804-11-0-local/7fa2af80.pub
 apt-get update
 apt-get install cuda-11.0
 # Install Pytorch for CUDA 11.3
+# -> torch==1.11.0+cu113
+# -> torchvision==0.12.0+cu113
+# -> torchaudio==0.11.0+cu113
 pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
 # Install DGL for CUDA 11.3
 pip install dgl-cu113 dglgo -f https://data.dgl.ai/wheels/repo.html
