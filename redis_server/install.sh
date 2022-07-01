@@ -8,3 +8,4 @@ pip install -r tests/requirements.txt
 cp -r src /usr/local/lib/redisgraph
 cd ..
 rm -rf RedisGraph
+pip install redis-server
