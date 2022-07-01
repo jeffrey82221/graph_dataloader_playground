@@ -46,25 +46,43 @@ def create_graph(connection_string: str):
             )
             tx.add(u1_meet_g1)
 
+def extract_examples(conn_str):
+    create_graph(conn_str)
+    gh = SQErzoGraph(conn_str)
+    node_tuples_q = gh.Query.raw(
+            "match (u1)-[:Meet]->(u2) return u1, u2"
+        ).execute(map_to={"u1": UserNode, "u2": UserNode})
+    # print('Node Tuples:', node_tuples_q)
+    nodes_q = gh.Query.raw(
+            "match (u:User) return u"
+        ).execute()
+    # print('Nodes:', nodes_q)
+    edges_q = gh.Query.raw(
+            "match ()-[e]-() return e"
+        ).execute()
+    # print('Edges:', edges_q)
+    return node_tuples_q, nodes_q, edges_q
 
-# conn_str = "neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email"
-conn_str = "redis://127.0.0.1:6379/?graph=email"
-create_graph(conn_str)
-gh = SQErzoGraph(conn_str)
-q = gh.Query.raw(
-        "match (u1)-[:Meet]->(u2) return u1, u2"
-    ).execute(map_to={"u1": UserNode, "u2": UserNode})
-print('Node Tuples:', q)
-q = gh.Query.raw(
-        "match (u:User) return u"
-    ).execute()
-print('Nodes:', q)
-q = gh.Query.raw(
-        "match ()-[e]-() return e"
-    ).execute()
-print('Edges:', q)
+
+# conn_str = "redis://127.0.0.1:6379/?graph=email"
+
 # TODO: 
 # FIX: 
-# 1. [ ] Edge seems to not saved in both neo4j & redisgraph version
+# 1. [X] Allow Edge to be saved and retrieved for both neo4j & redisgraph 
 # TEST:
-# 1. [ ] Make sure q return from both redisgraph & neo4j are the same 
+# 1. [X] Make sure q return from both redisgraph & neo4j are the same 
+
+neo_node_tuples_q, neo_nodes_q, neo_edges_q = extract_examples("neo4j://neo4j:esb1313@127.0.0.1:7687/?graph=email")
+redis_node_tuples_q, redis_nodes_q, redis_edges_q = extract_examples("redis://127.0.0.1:6379/?graph=email")
+import pprint
+print('Node Tuples:')
+pprint.pprint(neo_node_tuples_q)
+pprint.pprint(redis_node_tuples_q)
+print('Nodes:')
+pprint.pprint(neo_nodes_q)
+pprint.pprint(redis_nodes_q)
+print('Edges:')
+pprint.pprint(neo_edges_q)
+pprint.pprint(redis_edges_q)
+
+
