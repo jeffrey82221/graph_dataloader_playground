@@ -20,7 +20,7 @@ apt -y autoremove
 # 2. Install webpack
 npm install webpack
 npm install webpack-dev-server -g
-npm install --save-dev cross-env
+npm install --global cross-env
 # 2. Before development or build you have to install required dependencies
 yarn install
 yarn add -D webpack-cli
