@@ -14,10 +14,7 @@ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt update
 apt install -y yarn
-curl -sL https://deb.nodesource.com/setup_15.x | bash -
-apt-get remove -y nodejs
-apt install -y nodejs
-apt -y autoremove 
+conda install -c conda-forge nodejs==15.14.0 
 # 2. Install webpack
 npm install webpack -g
 npm install webpack-dev-server -g
