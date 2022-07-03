@@ -15,6 +15,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 apt update
 apt install -y yarn
 curl -sL https://deb.nodesource.com/setup_15.x | bash -
+apt-get remove -y nodejs
 apt install -y nodejs
 apt -y autoremove 
 # 2. Install webpack
