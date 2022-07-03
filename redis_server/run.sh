@@ -8,4 +8,4 @@ yarn --cwd redisinsight/api/
 yarn --cwd redisinsight/api/ start:dev
 # 2. Run FrontEnd - port: 8080
 yarn add -D webpack-cli
-yarn --yes start:web
+yarn start:web
