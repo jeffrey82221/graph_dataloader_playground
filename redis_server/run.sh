@@ -1,1 +1,9 @@
-/usr/local/lib/python3.6/site-packages/redis_server/bin/redis-server --port 6379 --loadmodule /usr/local/lib/redisgraph/redisgraph.so
+# Run Redis-Stack-Server (with RedisGraph inside)
+redis-stack-server
+# Running RedisInsight from Source
+git clone https://github.com/RedisInsight/RedisInsight.git
+cd RedisInsight
+# 1. Run BackEnd
+yarn --cwd redisinsight/api/ start:dev
+# 2. Run FrontEnd
+yarn start:web

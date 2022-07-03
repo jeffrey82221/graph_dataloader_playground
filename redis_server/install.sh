@@ -5,12 +5,21 @@ apt-get update
 apt-get install redis-stack-server
 # Install redis-server 6.0.9
 pip install redis-server
-# Install redisinsight (not working)
-curl -O https://downloads.redisinsight.redislabs.com/latest/redisinsight-linux64
-mkdir /usr/local/redisinsight
-mv redisinsight-linux64-1.12.0 /usr/local/redisinsight/redisinsight-1.12.0
-chmod +x /usr/local/redisinsight/redisinsight-1.12.0
-nohup /usr/local/redisinsight/redisinsight-1.12.0
-echo "export REDISINSIGHT_HOST=127.0.0.1" >> ~/.bash_profile
-echo "export REDISINSIGHT_HOST_DIR=/usr/local/redisinsight/.redisinsight" >> ~/.bash_profile
-source ~/.bash_profile
+# Install RedisInsight from source 
+# https://github.com/RedisInsight/RedisInsight/wiki/How-to-build-and-contribute
+# 1. Install yarn and nodes
+apt update
+apt install -y curl
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+apt update
+apt install -y yarn
+curl -sL https://deb.nodesource.com/setup_15.x | bash -
+apt install -y nodejs
+# 2. Install webpack
+npm intall webpack
+npm install webpack-dev-server -g
+# 2. Before development or build you have to install required dependencies
+yarn install
+yarn add -D webpack-cli
+yarn --cwd redisinsight/api/
