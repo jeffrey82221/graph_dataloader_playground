@@ -16,8 +16,9 @@ apt update
 apt install -y yarn
 curl -sL https://deb.nodesource.com/setup_15.x | bash -
 apt install -y nodejs
+apt -y autoremove 
 # 2. Install webpack
-npm intall webpack
+npm install webpack
 npm install webpack-dev-server -g
 # 2. Before development or build you have to install required dependencies
 yarn install
