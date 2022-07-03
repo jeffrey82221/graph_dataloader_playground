@@ -19,7 +19,7 @@ apt-get remove -y nodejs
 apt install -y nodejs
 apt -y autoremove 
 # 2. Install webpack
-npm install webpack
+npm install webpack -g
 npm install webpack-dev-server -g
 npm install --global cross-env
 # 2. Before development or build you have to install required dependencies
