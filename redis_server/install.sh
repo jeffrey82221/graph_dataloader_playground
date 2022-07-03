@@ -24,4 +24,3 @@ npm install --global cross-env
 # 2. Before development or build you have to install required dependencies
 yarn install
 yarn add -D webpack-cli
-yarn --cwd redisinsight/api/
