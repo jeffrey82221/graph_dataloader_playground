@@ -86,6 +86,9 @@ def add_graph_from_neo4j(widget_graph, g):
         # Explain dict(node):
         # Node('Country', 'Location', areaSqKm=1972550, id='MX', iso='MX', iso3='MEX', isoNumeric='484', name='Mexico')
         #  -> {'isoNumeric': '484', 'iso': 'MX', 'name': 'Mexico', 'id': 'MX', 'areaSqKm': 1972550, 'iso3': 'MEX'}
+        # RedisGraph: 
+        # 1. g.nodes -> get_nodes_and_edges(result)[0]
+        # 2. dict(node) -> node.properties
         # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
         # convert Neo4j specific types to string
@@ -108,6 +111,9 @@ def add_graph_from_neo4j(widget_graph, g):
             # Explain node.labels 
             # Node('Country', 'Location', areaSqKm=1972550, id='MX', iso='MX', iso3='MEX', isoNumeric='484', name='Mexico')
             # -> ['Location', 'Country']
+            # RedisGraph: 
+            # 1. g.nodes -> get_nodes_and_edges(result)[0]
+            # 2. node.labels -> node.labels
             # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
             index = min(index, priority_labels.index(label))
 
@@ -132,6 +138,9 @@ def add_graph_from_neo4j(widget_graph, g):
         # rel: IN(Node('City', 'Location', geonameId='11085890', id='11085890', location=(-99.64723, 18.94931), name='San Francisco', population=3165), 
         #        Node('Admin2', 'Location', geonameId='8583691', id='MX.15.113', location=(-99.67353, 18.96396), name='Villa Guerrero', parentId='MX.15'))
         # -> {}
+        # RedisGraph: 
+        # 1. g.relationships -> get_nodes_and_edges(result)[1]
+        # 2. dict(rel) -> rel.properties
         # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
         # convert Neo4j specific types to string
@@ -146,6 +155,8 @@ def add_graph_from_neo4j(widget_graph, g):
         # IN(Node('City', 'Location', geonameId='3519337', id='3519337', location=(-98.00209, 20.55254), name='San Francisco', population=3353), 
         #    Node('Admin2', 'Location', geonameId='8583728', id='MX.30.083', location=(-98.01656, 20.72862), name='Ixhuatlan de Madero', parentId='MX.30'))
         # -> "IN"
+        # RedisGraph: 
+        # 1. rel.__class__.__name__ -> rel.relation
         # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
         # assign unique node ids
@@ -155,6 +166,9 @@ def add_graph_from_neo4j(widget_graph, g):
         # Explain rel.start_node , rel.end_node : get the start and end nodes of the relationship
         # start_node: City 
         # end_node: Admin2
+        # RedisGraph: 
+        # 1. rel.start_node.identity -> rel.src_node
+        # 2. rel.end_node.identity -> rel.dest_node
         # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
         _set_attributes(edge_instance, rel_attributes)
 

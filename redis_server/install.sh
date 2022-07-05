@@ -5,6 +5,7 @@ apt-get update
 apt-get install redis-stack-server
 # Install redis-server 6.0.9
 pip install redis-server
+pip install redisgraph
 # Install RedisInsight from source 
 # https://github.com/RedisInsight/RedisInsight/wiki/How-to-build-and-contribute
 # 1. Install yarn and nodes
