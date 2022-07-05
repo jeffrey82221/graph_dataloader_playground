@@ -4,10 +4,16 @@
     - Step 2: convert Neo4j nodes to cytoscape nodes
     - Step 3: convert Neo4j relationships to cytoscape edges
 - [ ] Map the execution flow to that of redisgraph
-    - [ ] Create Graph in Neo4j & RedisGraph 
+    - [X] Create Graph in Neo4j & RedisGraph 
+    - [X] Using print to understand the flow 
     - [X] Copy the steps 1-3 for neo4j here 
-    - [-] Using print to understand the flow 
-    - [ ] Try to find out the redisgraph version for each step
+    - [X] Try to find out the redisgraph version for each step 
+    - [ ] Add Subgraph object to redisgraph (allow to be build from Node/Path/Edge)
+        - [ ] Understand Subgraph object of py2neo 
+        - [ ] Try to come up with redisgraph version of Subgraph 
+    - [ ] Build to_subgraph into redisgraph.query_result.QueryResult object
+        - [ ] Understand the to_subgraph of py2neo (work upon py2neo's Node, Path, and Edge, Records)
+        - [ ] Implement the to_subgraph for redisgraph
     - [ ] Compose a redisgraph version onto the forked repo
 """
 import json
@@ -117,8 +123,11 @@ def add_graph_from_neo4j(widget_graph, g):
 
         # assign unique id to node
         node_attributes["id"] = node.identity
-        # NOTE:
+        # NOTE: # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
         # Explain node.identity -> 301416 (int)
+        # RedisGraph: 
+        # node.identity -> node.id
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
         # assign class label with the highest priority
         index = len(priority_labels)
