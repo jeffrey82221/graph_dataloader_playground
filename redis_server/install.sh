@@ -14,12 +14,11 @@ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt update
 apt install -y yarn
-curl -sL https://deb.nodesource.com/setup_15.x | bash -
-apt install -y nodejs
+conda install -c conda-forge nodejs==15.14.0 
 # 2. Install webpack
-npm intall webpack
+npm install webpack -g
 npm install webpack-dev-server -g
+npm install --global cross-env
 # 2. Before development or build you have to install required dependencies
 yarn install
 yarn add -D webpack-cli
-yarn --cwd redisinsight/api/
