@@ -3,18 +3,38 @@
     - Step 1: get_node_labels_by_priority
     - Step 2: convert Neo4j nodes to cytoscape nodes
     - Step 3: convert Neo4j relationships to cytoscape edges
-- [ ] Map the execution flow to that of redisgraph
+- [X] Map the execution flow to that of redisgraph
     - [X] Create Graph in Neo4j & RedisGraph 
     - [X] Using print to understand the flow 
     - [X] Copy the steps 1-3 for neo4j here 
     - [X] Try to find out the redisgraph version for each step 
-    - [ ] Add Subgraph object to redisgraph (allow to be build from Node/Path/Edge)
-        - [ ] Understand Subgraph object of py2neo 
-        - [ ] Try to come up with redisgraph version of Subgraph 
-    - [ ] Build to_subgraph into redisgraph.query_result.QueryResult object
-        - [ ] Understand the to_subgraph of py2neo (work upon py2neo's Node, Path, and Edge, Records)
-        - [ ] Implement the to_subgraph for redisgraph
-    - [ ] Compose a redisgraph version onto the forked repo
+- [ ] Extending RedisGraph to support Subgraph convertion:
+    - [ ] Implement Unionable Graph objects
+        REF: https://github.com/py2neo-org/py2neo/blob/master/py2neo/data.py
+        - [ ] Subgrah: 
+            __init__(self, nodes, relationships)
+            __eq__ + __or__ + __str__
+            nodes, edges
+            nodes_count, edge_count
+            add_node, add_edge
+            labels、types
+            (optional) __iter__、__bool__、__and__、__sub__、__xor__
+        - [ ] Allow Path, Node, Edge to support union operation
+            - [ ] Edge:
+                add __or__ (a | b -> Subgraph) 
+            - [ ] Node 
+                add __or__ (a | b -> Subgraph) 
+            - [ ] Path
+                add __or__ (a | b -> Subgraph)
+    - [ ] Implement the to_subgraph method:
+        REF: https://github.com/py2neo-org/py2neo/blob/master/py2neo/cypher/__init__.py
+        - [ ] add to_subgraph method to Edge, Node, & Path
+        - [ ] add to_subgraph method to redisgraph.query_result.QueryResult
+            - How: iterate over result_set of QueryResult
+- [ ] Extending ipycytoscape's ipycytoscape/cytoscape.py
+    - [ ] Add a customized to_subgraph method for converting result_set of RedisGraph
+    - [ ] Build add_graph_from_redisgraph method following the NOTE(s) here
+    - [ ] Once RedisGraph PR is done, substitude the `to_subgraph` to that of redisgraph version
 """
 import json
 from py2neo import Graph
