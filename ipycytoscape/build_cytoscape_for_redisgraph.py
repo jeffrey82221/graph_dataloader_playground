@@ -10,6 +10,22 @@
     - [ ] Try to find out the redisgraph version for each step
     - [ ] Compose a redisgraph version onto the forked repo
 """
+import json
+from py2neo import Graph
+from ipycytoscape import Node, Edge
+
+"""
+NOTE: 
+_set_attributes & add_graph_from_neo4j are from ipycytoscape/cytoscape.py
+"""
+def _set_attributes(instance, data):
+    cyto_attrs = instance._cyto_attrs + instance._base_cyto_attrs
+    for k, v in data.items():
+        if k in cyto_attrs:
+            setattr(instance, k, v)
+        else:
+            instance.data[k] = v
+
 def add_graph_from_neo4j(widget_graph, g):
     """
     Converts a py2neo Neo4j subgraph into a Cytoscape graph. It also adds
@@ -190,10 +206,12 @@ graph = Graph("bolt://132.249.238.185:7687", user="reader", password="demo")
 query1 = """
 MATCH p=(:City{name:'San Francisco'})-[:IN*]->(:World) RETURN p
 """
-subgraph1 = graph.run(query1).to_subgraph()
+
+subgraph = next(graph.run(query1)).to_subgraph() # This is a py2neo.data.Path object
+# subgraph = graph.run(query1).to_subgraph() # Execute this produce a subgraph which is the union of all py2neo.data objects (e.g., Path, Node, Edges)
 print('Get Subgraph')
 print('Create widget')
-add_graph_from_neo4j(widget_graph, subgraph1)
+add_graph_from_neo4j(widget_graph, subgraph)
 print('SUCCESFULLY add Graph into Widget')
 
 """
